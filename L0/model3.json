@@ -1,0 +1,55 @@
+{
+  "order_uid": "test233",
+  "track_number": "WRACK",
+  "entry": "WBIL",
+  "delivery": {
+    "name": "mark 2",
+    "phone": "+9800123",
+    "zip": "109",
+    "city": "msk",
+    "address": "Cenrt 12, 2",
+    "region": "msk",
+    "email": "tes123t@gmail.com"
+  },
+  "payment": {
+    "transaction": "b563b6test",
+    "request_id": "",
+    "currency": "USD",
+    "provider": "wbpay",
+    "amount": 17,
+    "payment_dt": 7727,
+    "bank": "sber",
+    "delivery_cost": 10,
+    "goods_total": 37,
+    "custom_fee": 0
+  },
+  "items": [
+    {
+      "chrt_id": 990,
+      "track_number": "TTRACK",
+      "price": 43,
+      "rid": "ab421btest",
+      "name": "Masas",
+      "sale": 0,
+      "size": "",
+      "total_price": 31,
+      "nm_id": 23212,
+      "brand": "Sabo",
+      "status": 202
+    },
+    {
+      "chrt_id": 1,
+      "track_number": "1TRACK",
+      "price": 10000,
+      "rid": "ab421btest",
+      "name": "BigMoney",
+      "sale": 0,
+      "size": "XXL",
+      "total_price": 1,
+      "nm_id": 1,
+      "brand": "Cash",
+      "status": 202
+    }
+  ],
+  "locale": "en"  
+}

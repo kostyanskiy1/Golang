@@ -1,0 +1,19 @@
+{
+  "order_uid": "123",
+  "track_number": "big big",
+  "entry": "ok",
+  "delivery": {
+    "name": "Big Big",
+    "phone": "+0",
+    "zip": "12344",
+    "city": "msk",
+    "address": "",
+    "region": "",
+    "email": "test@.com"
+  },
+  "payment": {
+    "transaction": "123",
+    "request_id": "",
+    "currency": "USD"
+}
+}
