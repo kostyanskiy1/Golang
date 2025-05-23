@@ -1,4 +1,145 @@
 # WB Tech: level # 2 (Golang)
+## Tasks
+### Design patterns
+Implement patterns, explain the applicability of each pattern, pros and cons, and real examples of using the pattern in practice.
+
+Pattern "facade".
+Pattern "builder".
+Pattern "visitor".
+Pattern "command".
+Pattern "call chain".
+Pattern "factory method".
+Pattern "strategy".
+Pattern "state".
+
+### Development tasks
+Programs must pass all tests. The code must pass go vet and golint checks.
+Basic task
+
+1. #### Basic task
+Create a program that prints the exact time using the NTP library. Initialize as a go module. Use the github.com/beevik/ntp library. Write a program that prints the current time / the exact time using this library.
+
+Requirements:
+The program must be designed as a go module
+The program must correctly handle library errors: output them to STDERR and return a non-zero exit code to the OS
+
+2. #### Unpacking task
+Create a Go function that performs primitive unpacking of a string containing repeating characters/runes, for example:
+```"a4bc2d5e" => "aaaabccddddde"
+"abcd" => "abcd"
+"45" => "" (incorrect string)
+"" => ""
+```
+Additional
+Implement support for escape sequences.
+For example:
+```
+qwe\4\5 => qwe45 (*)
+qwe\45 ​​=> qwe44444 (*)
+qwe\\5 => qwe\\\\\ (*)
+```
+
+If an invalid string was passed, the function should return an error. Write unit tests.
+
+3. #### Utility sort
+Sort lines in a file similar to the console utility sort (man sort - see the description and main parameters): the input is a file with unsorted lines, the output is a file with sorted ones.
+
+Implement support for the following keys in the utility:
+
+-k — specify a column for sorting (words in a line can act as columns, the default separator is a space)
+-n — sort by numeric value
+-r — sort in reverse order
+-u — do not output duplicate lines
+
+Additional
+
+Implement support for the following keys in the utility:
+
+-M — sort by month name
+-b — ignore trailing spaces
+-c — check if the data is sorted
+-h — sort by numeric value taking into account suffixes
+
+4. #### Search for anagrams in a dictionary
+
+Write a function to search for all sets of anagrams in a dictionary.
+
+For example:
+'five-dollar coin', 'heel' and 'hoe' - belong to one set,
+'leaflet', 'ingot' and 'table' - to another.
+
+Requirements:
+* Input data for the function: a reference to an array, each element of which is a word in Russian in utf8 encoding
+* Output data: a reference to a map of anagram sets
+* Key - the first word from the set encountered in the dictionary. Value - a reference to an array, each element of which is a word from the set.
+* The array must be sorted in ascending order.
+* Sets of one element must not be included in the result.
+* All words must be converted to lower case.
+* As a result, each word must occur only once.
+
+5. #### grep utility
+
+Implement a filtering utility similar to the console utility (man grep - see the description and main parameters).
+
+Implement support for the following keys in the utility:
+-A - "after" print +N lines after the match
+-B - "before" print +N lines before the match
+-C - "context" (A+B) print ±N lines around the match
+-c - "count" (number of lines)
+-i - "ignore-case" (ignore case)
+-v - "invert" (instead of a match, exclude)
+-F - "fixed", exact match with a line, not a pattern
+-n - "line num", print the line number
+
+6. #### The cut utility
+
+Implement a utility similar to the console command cut (man cut). The utility should accept lines via STDIN, split them into columns by a separator (TAB), and output the requested ones.
+
+Implement support for the following keys in the utility:
+-f - "fields" - select fields (columns)
+-d - "delimiter" - use a different delimiter
+-s - "separated" - only lines with a delimiter
+
+7. #### Or channel
+
+Implement a function that will merge one or more done channels into a single channel if one of its constituent channels closes.
+
+An obvious solution would be an expression using select that would implement this connection, but sometimes the total number of done channels that you work with at runtime is unknown. In this case, it is more convenient to use a call to a single function that, having accepted one or more or channels as input, would implement all the functionality.
+
+Function definition:
+```go
+var or func(channels ...<- chan interface{}) <- chan interface{}
+Example of using the function:
+sig := func(after time.Duration) <- chan interface{} {
+c := make(chan interface{})
+go func() {
+defer close(c)
+time.Sleep(after)
+}()
+return c
+}
+
+start := time.Now()
+<-or (
+sig(2*time.Hour),
+sig(5*time.Minute),
+sig(1*time.Second),
+sig(1*time.Hour),
+sig(1*time.Minute),
+)
+
+fmt.Printf(“fone after %v”, time.Since(start))
+```
+
+8. #### Interaction with the OS
+
+You need to implement your own UNIX shell utility with support for a number of simple
+
+
+
+
+
+# WB Tech: level # 2 (Golang)
 ## Задания
 ### Паттерны проектирования
 Реализовать паттерны, объяснить применимость каждого паттерна, плюсы и минусы, а также реальные примеры использования паттерна на практике.
