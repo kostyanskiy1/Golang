@@ -131,9 +131,66 @@ sig(1*time.Minute),
 fmt.Printf(“fone after %v”, time.Since(start))
 ```
 
-8. #### Interaction with the OS
+8. #### Interaction with OS
 
-You need to implement your own UNIX shell utility with support for a number of simple
+It is necessary to implement your own UNIX shell utility with support for a number of simple commands:
+
+- cd <args> - change directory (this and that can be used as an argument)
+- pwd - show the path to the current directory
+- echo <args> - output argument to STDOUT
+- kill <args> - "kill" the process passed as an argument (example: such-and-such example)
+- ps - outputs general information on running processes in the format *such-and-such format*
+
+It is also necessary to support the functionality of fork/exec commands
+
+Additionally, it is necessary to support a pipeline on pipes (linux pipes, example cmd1 | cmd2 | .... | cmdN).
+
+*A shell is a regular console program that, when launched, in an interactive session outputs a certain prompt
+to STDOUT and waits for user input through STDIN. After waiting for input, it processes the command according to its logic
+and, if necessary, displays the result on the screen. The interactive session is maintained until the exit command is entered (for example, \quit).
+
+9. #### wget utility
+
+Implement the wget utility with the ability to download entire sites.
+
+10. #### telnet utility
+
+Implement the simplest telnet client.
+
+Examples of calls:
+go-telnet --timeout=10s host port go-telnet mysite.ru 8080 go-telnet --timeout=3s 1.1.1.1 123
+
+Requirements:
+The program must connect to the specified host (ip or domain name + port) via TCP. After connecting, the program's STDIN should be written to the socket, and the data received from the socket should be output to STDOUT
+Optionally, a timeout for connecting to the server can be passed to the program (via the --timeout argument, 10s by default)
+When Ctrl+D is pressed, the program should close the socket and exit. If the socket is closed from the server side, the program should also exit. When connecting to a non-existent server, the program should exit via timeout
+
+11. #### HTTP server
+
+Implement an HTTP server for working with the calendar. As part of the task, it is necessary to work strictly with the standard HTTP library.
+
+As part of the task, it is necessary to:
+Implement helper functions for serializing domain objects to JSON.
+Implement helper functions for parsing and validating the parameters of the /create_event and /update_event methods.
+Implement HTTP handlers for each of the API methods using helper functions and domain objects.
+Implement middleware for logging requests
+
+API methods:
+
+* POST /create_event
+* POST /update_event
+* POST /delete_event
+* GET /events_for_day
+* GET /events_for_week
+* GET /events_for_month
+
+Parameters are passed as www-url-form-encoded (i.e. regular user_id=3&date=2019-09-09). In GET methods, parameters are passed via queryString, in POST via the request body.
+Each request should return a JSON document containing either {"result": "..."} in case of successful method execution, or {"error": "..."} in case of a business logic error.
+
+As part of the task, it is necessary to:
+Implement all methods.
+Business logic should NOT depend on the HTTP server code.
+In case of a business logic error, the server should return HTTP 503. In case of an input data error (invalid int, for example), the server should return HTTP 400. In case of other errors, the server should return HTTP 500. The web server should run on the port specified in the config and output each processed request to the log.
 
 
 
